@@ -9,7 +9,7 @@ RUN apt-get update && \
     libssl-dev automake gcc \
     make wget autoconf
 
-RUN wget https://github.com/troglobit/inadyn/releases/download/${INADYN_VERSION}/inadyn-${INADYN_VERSION}.tar.xz -P /tmp
+RUN wget https://github.com/troglobit/inadyn/releases/download/v${INADYN_VERSION}/inadyn-${INADYN_VERSION}.tar.xz -P /tmp
 RUN tar xf /tmp/inadyn-${INADYN_VERSION}.tar.xz
 
 WORKDIR inadyn-${INADYN_VERSION}
