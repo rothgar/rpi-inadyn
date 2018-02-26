@@ -3,9 +3,18 @@ rpi-inadyn
 
 Docker container for running [inadyn](https://github.com/troglobit/inadyn)
 
-Compiled from [rpi-inadyn-build](https://github.com/rothgar/rpi-inadyn-build)
+## Build
 
-Run with
+Uses multi-stage build to compile inadyn from source.
+
+Requires Docker >= 17.05 with multi-stage build support
+
+```
+docker build -t inadyn .
+```
+
+## Run
+
 ```
 docker run -d -e SYSTEM=default@domains.google.com -e USERNAME=$USERNAME -e PASSWORD=$PASSWORD -e ALIAS=example.com rothgar/rpi-inadyn:1.99.15
 ```
