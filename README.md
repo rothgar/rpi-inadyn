@@ -1,22 +1,35 @@
 rpi-inadyn
 ---
 
-Docker container for running [inadyn](https://github.com/troglobit/inadyn)
+Docker container for running [inadyn](https://github.com/troglobit/inadyn) on ARM
 
-## Build
+Multi-stage build will compile from source and then copy the binary to the final container.
 
-Uses multi-stage build to compile inadyn from source.
+# Build
 
-Requires Docker >= 17.05 with multi-stage build support
+Just run `docker build -t inadyn .` to build a container.
+
+# Customize
+
+Create a config file for inadyn and ADD or mount it to /etc/inadyn.conf
+
+Example inadyn.conf
+```
+# In-A-Dyn v2.0 configuration file format
+period          = 300
+user-agent      = Mozilla/5.0
+
+# The FreeDNS username must be in lower case
+# The password (max 16 chars) is case sensitive
+provider freedns {
+    username    = lower-case-username
+    password    = case-sensitive-pwd
+    hostname    = some.example.com
+}
+```
+
+# Run
 
 ```
-docker build -t inadyn .
+docker run -d rothgar/rpi-inadyn:v2.3.1
 ```
-
-## Run
-
-```
-docker run -d -e SYSTEM=default@domains.google.com -e USERNAME=$USERNAME -e PASSWORD=$PASSWORD -e ALIAS=example.com rothgar/rpi-inadyn:1.99.15
-```
-
-If you need more runtime options then you can add an /etc/inadyn.conf file are change the run command.
